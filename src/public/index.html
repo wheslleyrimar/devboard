@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Projects Dashboard</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="logo">
+    <div class="logo-mark">◆</div>
+    DevBoard
+  </div>
+
+  <nav class="nav-section">
+    <div class="nav-item active" data-view="dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      Dashboard
+    </div>
+    <div class="nav-item" data-view="projects">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      Projetos
+    </div>
+    <div class="nav-item" data-view="activity">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Atividade
+    </div>
+  </nav>
+
+  <div class="nav-section">
+    <div class="nav-label">Workspace</div>
+    <div class="nav-item" data-view="settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Configurações
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="avatar"></div>
+    <div class="user-meta">
+      <div class="name">Wheslley</div>
+      <div class="handle">@wheslley</div>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="mobile-toggle" id="mobileToggle">☰</div>
+
+  <div class="topbar">
+    <div>
+      <h1>Meus Projetos</h1>
+      <p>Acompanhe e organize tudo que você está construindo.</p>
+    </div>
+    <button class="btn" id="newProjectBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+      Novo Projeto
+    </button>
+  </div>
+
+  <div class="summary">
+    <div class="summary-card">
+      <div class="label"><span class="dot total"></span>Total de Projetos</div>
+      <div class="value" id="countTotal">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label"><span class="dot active"></span>Ativos</div>
+      <div class="value" id="countActive">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label"><span class="dot paused"></span>Pausados</div>
+      <div class="value" id="countPaused">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label"><span class="dot completed"></span>Concluídos</div>
+      <div class="value" id="countCompleted">0</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="active">Ativos</button>
+      <button class="filter-btn" data-filter="paused">Pausados</button>
+      <button class="filter-btn" data-filter="completed">Concluídos</button>
+    </div>
+    <input type="text" class="search" id="searchInput" placeholder="Buscar projeto...">
+  </div>
+
+  <div class="grid" id="grid"></div>
+</main>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h2>Novo Projeto</h2>
+    <form id="projectForm">
+      <div class="field">
+        <label>Nome do projeto</label>
+        <input type="text" id="fName" required placeholder="Ex: Finance Tracker">
+      </div>
+      <div class="field">
+        <label>Descrição</label>
+        <textarea id="fDesc" required placeholder="Do que se trata o projeto?"></textarea>
+      </div>
+      <div class="field">
+        <label>Stack (separada por vírgula)</label>
+        <input type="text" id="fStack" required placeholder="Ex: React, Node.js, PostgreSQL">
+      </div>
+      <div class="field">
+        <label>Status</label>
+        <select id="fStatus">
+          <option value="active">Ativo</option>
+          <option value="paused">Pausado</option>
+          <option value="completed">Concluído</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+        <button type="submit" class="btn">Criar Projeto</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="detailModalOverlay">
+  <div class="modal wide">
+    <div class="card-head">
+      <h2 id="detailName"></h2>
+      <span class="status-badge" id="detailStatusBadge"></span>
+    </div>
+    <p class="detail-desc" id="detailDesc"></p>
+    <div class="stack" id="detailStack"></div>
+
+    <div class="detail-section">
+      <div class="detail-section-head">
+        <h3>Tarefas</h3>
+        <button type="button" class="btn btn-secondary" id="toggleTaskFormBtn">+ Nova Tarefa</button>
+      </div>
+      <div class="task-list" id="taskList"></div>
+
+      <form id="taskForm" class="task-form">
+        <div class="field">
+          <label>Título</label>
+          <input type="text" id="tTitle" required placeholder="Ex: Configurar autenticação">
+        </div>
+        <div class="field">
+          <label>Descrição</label>
+          <textarea id="tDesc" required placeholder="Do que se trata a tarefa?"></textarea>
+        </div>
+        <div class="field">
+          <label>Prioridade</label>
+          <select id="tPriority">
+            <option value="low">Baixa</option>
+            <option value="medium" selected>Média</option>
+            <option value="high">Alta</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Status</label>
+          <select id="tStatus">
+            <option value="todo">A Fazer</option>
+            <option value="in_progress">Em Progresso</option>
+            <option value="done">Concluída</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelTaskBtn">Cancelar</button>
+          <button type="submit" class="btn">Adicionar Tarefa</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-secondary" id="closeDetailBtn">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
